@@ -10,6 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 
 
@@ -25,6 +27,7 @@ import {MatDialogModule} from '@angular/material/dialog';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
