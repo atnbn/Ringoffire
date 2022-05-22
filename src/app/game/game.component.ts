@@ -10,6 +10,9 @@ import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
+
+
+
   pickCardAnimation = false;
   currentCard: string = '';
   game: Game = new Game;
@@ -29,9 +32,14 @@ export class GameComponent implements OnInit {
 
       this.currentCard = this.game.stack.pop()!;
       this.pickCardAnimation = true;
+      console.log('Game is ' ,this.game)
       console.log('New card:' + this.currentCard)
-      console.log(this.game)
 
+
+      
+      this.game.currentPlayer++;
+      //                                              modolu for loop
+      this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
       setTimeout(() => {
         this.game.playedCard.push(this.currentCard);
         this.pickCardAnimation = false;
@@ -39,12 +47,15 @@ export class GameComponent implements OnInit {
     }
   }
 
-openDialog(): void {
+openDialog(): void { // adding name into the array 
   const dialogRef = this.dialog.open(DialogAddPlayerComponent);
  
 
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
+  dialogRef.afterClosed().subscribe((name: string) => {
+    // überprüfen ob name existiert und dann ob name größer als 0 ist
+    if(name && name.length > 0){
+      this.game.players.push(name);
+    }
   });
 }
 }

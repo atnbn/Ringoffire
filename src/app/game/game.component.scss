@@ -69,3 +69,10 @@
         transform: scale(1.3) translateX(140px) translateY(-180px) rotate(-10deg);
     }
 }
+
+.pin-bottom {
+    position: absolute;
+    bottom: 32px;
+    left: 100px;
+    right: 100px;
+}
