@@ -19,7 +19,12 @@ import {MatTableModule} from '@angular/material/table';
 import { DialogAddPlayerComponent } from './dialog-add-player/dialog-add-player.component';
 import { GameInfoComponent } from './game-info/game-info.component';
 import {MatCardModule} from '@angular/material/card';
-
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideDatabase,getDatabase } from '@angular/fire/database';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
 
 
 
@@ -40,6 +45,7 @@ import {MatCardModule} from '@angular/material/card';
     CUSTOM_ELEMENTS_SCHEMA
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
     BrowserModule,
     FormsModule,
     AppRoutingModule,
@@ -52,7 +58,10 @@ import {MatCardModule} from '@angular/material/card';
     MatInputModule,
     MatSelectModule,
     MatGridListModule,
-    MatTableModule
+    MatTableModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideDatabase(() => getDatabase())
   ],
 
   exports: [
@@ -60,7 +69,9 @@ import {MatCardModule} from '@angular/material/card';
     MatInputModule
   ],
 
-  providers: [],
+  providers: [
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
