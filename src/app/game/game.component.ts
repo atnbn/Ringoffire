@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/models/game';
 import {MatDialog} from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -17,23 +19,39 @@ export class GameComponent implements OnInit {
   currentCard: string = '';
   game: Game = new Game;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute , private firestore: AngularFirestore, 
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.newGame()
+    this.route.params.subscribe((params) =>{
+      console.log(params['id']);
+      this
+      .firestore
+      .collection('games')
+      .doc(params['id'])
+      .valueChanges()
+      .subscribe((game:any)=>{
+        console.log('Game update' , game);
+        this.game.currentPlayer = game.currentPlayer;
+        this.game.playedCard = game.playedCard;
+        this.game.players = game.players;
+        this.game.stack = game.stack
+      });
+    })
+   
+
   }
 
   newGame() {
-    this.game = new Game;
-    console.log(this.game);
+    this.game = new Game;    // So kann man was in das Firebase json adden
+    
   }
   takeCard() {
     if (!this.pickCardAnimation) {
 
       this.currentCard = this.game.stack.pop()!;
       this.pickCardAnimation = true;
-      console.log('Game is ' ,this.game)
-      console.log('New card:' + this.currentCard)
 
 
       
