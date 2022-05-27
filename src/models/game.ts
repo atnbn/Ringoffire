@@ -17,10 +17,10 @@ export class Game {
 
         public toJson(){
             return{
+                currentPlayer: this.currentPlayer,
+                playedCard: this.playedCard,
                 players: this.players,
                 stack: this.stack,
-                playedCard: this.playedCard,
-                currentPlayer: this.currentPlayer
             }
        
     }
