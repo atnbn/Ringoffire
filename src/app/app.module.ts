@@ -25,6 +25,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
+import { PlayerMobileComponent } from './player-mobile/player-mobile.component';
 
 
 
@@ -39,7 +40,8 @@ import { AngularFireModule } from '@angular/fire/compat';
     GameComponent,
     PlayerComponent,
     DialogAddPlayerComponent,
-    GameInfoComponent
+    GameInfoComponent,
+    PlayerMobileComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

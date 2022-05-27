@@ -15,9 +15,10 @@ export class GameComponent implements OnInit {
 
 
 
-  pickCardAnimation = false;
-  currentCard: string = '';
+ 
   game: Game = new Game;
+  gameId: string;
+
 
   constructor(private route: ActivatedRoute , private firestore: AngularFirestore, 
     public dialog: MatDialog) { }
@@ -25,11 +26,12 @@ export class GameComponent implements OnInit {
   ngOnInit(): void {
     this.newGame()
     this.route.params.subscribe((params) =>{
-      console.log(params["id"]);
+      console.log(params['id']);
+      this.gameId = params['id'];
       this
       .firestore
       .collection('games')
-      .doc(params["id"])
+      .doc(this.gameId)
       .valueChanges()
       .subscribe((game: any) => {
         console.log('Game update' , game);
@@ -37,6 +39,9 @@ export class GameComponent implements OnInit {
         this.game.playedCard = game.playedCard;
         this.game.players = game.players;
         this.game.stack = game.stack;
+        this.game.pickCardAnimation = game.pickCardAnimation;
+        this.game.currentCard = game.currentCard;
+
       });
     })
    
@@ -48,19 +53,18 @@ export class GameComponent implements OnInit {
     
   }
   takeCard() {
-    if (!this.pickCardAnimation) {
+    if (!this.game.pickCardAnimation) {
+      this.game.currentCard = this.game.stack.pop()!;
+      this.game.pickCardAnimation = true;
 
-      this.currentCard = this.game.stack.pop()!;
-      this.pickCardAnimation = true;
-
-
-      
       this.game.currentPlayer++;
-      //                                              modolu for loop
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+      this.saveGame();
+
       setTimeout(() => {
-        this.game.playedCard.push(this.currentCard);
-        this.pickCardAnimation = false;
+        this.game.playedCard.push(this.game.currentCard);
+        this.game.pickCardAnimation = false;
+        this.saveGame();
       }, 1000)
     }
   }
@@ -73,9 +77,18 @@ openDialog(): void { // adding name into the array
     // überprüfen ob name existiert und dann ob name größer als 0 ist
     if(name && name.length > 0){
       this.game.players.push(name);
+      this.saveGame();
     }
   });
 }
+  saveGame(){
+    this
+      .firestore
+      .collection('games')
+      .doc(this.gameId)
+      .update(this.game.toJson())
+  }
+
 }
 
 
