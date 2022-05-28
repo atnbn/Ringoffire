@@ -132,3 +132,11 @@ app-player, app-player-mobile {
         display: none;
     }
 }
+
+
+.preloadImage{
+    opacity: 0;
+    z-index: -99;
+    width: 0px;
+    height: 0px;
+}
