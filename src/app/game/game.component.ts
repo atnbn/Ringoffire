@@ -64,7 +64,7 @@ export class GameComponent implements OnInit {
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
       this.saveGame();
-
+     
       setTimeout(() => {
         this.game.playedCard.push(this.game.currentCard);
         this.game.pickCardAnimation = false;
@@ -90,6 +90,9 @@ export class GameComponent implements OnInit {
     
    } });
 }
+
+
+
 
 openDialog(): void { // adding name into the array 
   const dialogRef = this.dialog.open(DialogAddPlayerComponent);
