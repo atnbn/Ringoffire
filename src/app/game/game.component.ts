@@ -14,9 +14,8 @@ import { EditPlayerComponent } from '../edit-player/edit-player.component';
 })
 export class GameComponent implements OnInit {
 
-
-
- 
+  start_game= new Audio('assets/audio/start-game.mp3');
+  take_card = new Audio('assets/audio/take-card.mp3');
   game: Game = new Game;
   gameId: string;
   gameOver = false;
@@ -53,6 +52,7 @@ export class GameComponent implements OnInit {
 
   newGame() {
     this.game = new Game;    // So kann man was in das Firebase json adden
+    this.start_game.play()
     
   }
   takeCard() {
@@ -63,6 +63,7 @@ export class GameComponent implements OnInit {
       this.game.pickCardAnimation = true;
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+      this.take_card.play();
       this.saveGame();
      
       setTimeout(() => {
