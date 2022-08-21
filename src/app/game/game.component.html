@@ -18,12 +18,12 @@
 
 <div *ngIf="!gameOver" class="field" style="background-image: url(/assets/board.jpg);">
     <div class="field" >
-    <div class="card-stack">
+    <div id="card-stack" class="card-stack">
         <!-- Card stack-->
         <img *ngFor="let c of [0,1,2,3]; let i = index;" [ngStyle]="{'right.px' : i * 5}"
             src="/assets/img/cards/card_cover.png">
 
-        <img (click)="takeCard()" class="top-card" style="right: 25px" src="/assets/img/cards/card_cover.png">
+        <img (click)="takeCard()" disable="true" class="top-card" style="right: 25px" src="/assets/img/cards/card_cover.png">
         <!-- Stack for played Cards-->
         <img *ngFor="let card of game.playedCard" class="played-card" src="/assets/img/cards/{{ card }}.png">
 
@@ -42,3 +42,13 @@
 
 
 <img class="preloadImage" src="/assets/img/cards/{{ game.stack[game.stack.length -1] }}.png">
+
+<!-- -->
+
+<div [ngClass]="statusPlayer? 'd-none' : 'alertPlayer'" >
+    <mat-card class="alert-container">
+        Pleas add a player
+        <button (click)="closePopup()"><mat-icon>close</mat-icon></button>
+
+    </mat-card>
+    </div>
