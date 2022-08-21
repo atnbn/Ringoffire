@@ -43,7 +43,7 @@ import { EditPlayerComponent } from './edit-player/edit-player.component';
     DialogAddPlayerComponent,
     GameInfoComponent,
     PlayerMobileComponent,
-    EditPlayerComponent
+    EditPlayerComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
