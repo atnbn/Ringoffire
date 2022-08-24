@@ -1,7 +1,7 @@
 
 
 
-<app-player (click)="editPlayer(i)" *ngFor="let player of game.players; let i = index;" [ngStyle]="{'top.px' : 20 + (i * 50)}" [name]="player"
+<app-player (click)="editPlayer(i)" *ngFor="let player of game.players; let i = index;" [ngStyle]="{'top.px' : 20 + (i * 55)}" [name]="player"
     [playerActive]="i == game.currentPlayer" 
     [image]="game.player_images[i]" class="player-position hide-mobile"></app-player>
 
@@ -48,7 +48,7 @@
 <div [ngClass]="statusPlayer? 'd-none' : 'alertPlayer'" >
     <mat-card class="alert-container">
         Pleas add a player
-        <button (click)="closePopup()"><mat-icon>close</mat-icon></button>
+        <button mat-button (click)="closePopup()"><mat-icon>close</mat-icon></button>
 
     </mat-card>
     </div>

@@ -75,8 +75,10 @@ export class GameComponent implements OnInit {
         this.game.pickCardAnimation = false;
         this.saveGame();
       }, 1000)
-    } 
-    this.checkStatus() 
+      this.checkStatus() 
+    } else{
+      this.statusPlayer = false;
+    }
   }
   editPlayer(playerId: number){
     // console.log('edit player' , playerId)

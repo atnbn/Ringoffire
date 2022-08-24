@@ -5,7 +5,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
+    background: no-repeat;
+    background-size: cover;}
 
 .card-stack {
     position: relative;
@@ -156,4 +157,12 @@ app-player-mobile {
 }
 .alert-container {
     display: flex;
+    flex-direction: column;
+    height: 31%;
+    justify-content: center;
+
+
+    button{
+        border-radius: 10px;
+    }
 }
