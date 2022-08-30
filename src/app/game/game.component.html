@@ -20,7 +20,7 @@
     <div class="field" >
     <div id="card-stack" class="card-stack">
         <!-- Card stack-->
-        <img *ngFor="let c of [0,1,2,3]; let i = index;" [ngStyle]="{'right.px' : i * 5}"
+        <img *ngFor="let c of [0,1,2,3]; let i = index;" class="card-deck" [ngStyle]="{'right.px' : i * 5}"
             src="/assets/img/cards/card_cover.png">
 
         <img (click)="takeCard()" disable="true" class="top-card" style="right: 25px" src="/assets/img/cards/card_cover.png">

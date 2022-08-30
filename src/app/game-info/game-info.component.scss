@@ -3,3 +3,10 @@ mat-card{
       min-height: 120px;
     }
 }
+
+
+@media (max-height: 400px) {
+  mat-card{
+    height: 40px !important;
+  }
+}
